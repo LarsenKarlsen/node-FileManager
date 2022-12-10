@@ -40,7 +40,8 @@ const fileManager = async () => {
                 rl.prompt()
                 break;
             case line.includes('cd '):
-                await cd(line.split(' '));
+                currentdir = await cd(line.split(' ')[1], currentdir);
+                rl.setPrompt(`You are currently in ${currentdir}\nEnter command : => `);
                 rl.prompt();
                 break;
             case '.exit':
