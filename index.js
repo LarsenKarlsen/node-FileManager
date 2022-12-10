@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url';
 
 import up from './commands/up.js';
 import ls from './commands/ls.js';
+import cd from './commands/cd.js';
 
 const __filename = fileURLToPath(import.meta.url);
 
@@ -27,21 +28,27 @@ const fileManager = async () => {
     rl.prompt();
 
     rl.on('line', async (line)=>{
-        switch(line.trim()){
-            case 'up':
+        line = line.trim()
+        switch(true){
+            case line === 'up':
                 currentdir = up(homedir, currentdir);
                 rl.setPrompt(`You are currently in ${currentdir}\nEnter command : => `);
                 rl.prompt();
                 break;
-            case 'ls':
+            case line === 'ls':
                 await ls(currentdir);
                 rl.prompt()
+                break;
+            case line.includes('cd '):
+                await cd(line.split(' '));
+                rl.prompt();
                 break;
             case '.exit':
                 rl.close();
                 break;
             default:
-                console.log(line)
+                console.log('DEFAULT OUTPUT')
+                console.log(line);
                 rl.prompt();
                 break;
         }
