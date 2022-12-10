@@ -4,7 +4,8 @@ import readline from 'readline';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-import up from './commands/up.js'
+import up from './commands/up.js';
+import ls from './commands/ls.js';
 
 const __filename = fileURLToPath(import.meta.url);
 
@@ -12,7 +13,7 @@ const __dirname = path.dirname(__filename);
 
 const fileManager = async () => {
     const homedir = os.homedir();
-    let currentdir = path.join(homedir, 'babulius');
+    let currentdir = path.join(homedir, 'node', 'taro');
 
     const username = process.argv.slice(2).filter(s => s.includes('--username'))[0].split('=')[1];  
     console.log(`Welcome to the File Manager, ${username}!`);
@@ -25,11 +26,15 @@ const fileManager = async () => {
 
     rl.prompt();
 
-    rl.on('line', (line)=>{
+    rl.on('line', async (line)=>{
         switch(line.trim()){
             case 'up':
                 currentdir = up(homedir, currentdir);
-                rl.setPrompt(`You are currently in ${currentdir}\nEnter command : => `)
+                rl.setPrompt(`You are currently in ${currentdir}\nEnter command : => `);
+                rl.prompt();
+                break;
+            case 'ls':
+                await ls(currentdir);
                 rl.prompt()
                 break;
             case '.exit':
