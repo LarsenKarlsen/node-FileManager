@@ -18,14 +18,14 @@ const fileManager = async () => {
     const rl = readline.createInterface({
         input: process.stdin,
         output: process.stdout,
-        prompt: 'Enter text msg : => ',
+        prompt: `You are currently in ${currentdir}\nEnter command : => `,
     });
 
     rl.prompt();
 
     rl.on('line', (line)=>{
         switch(line.trim()){
-            case 'exit':
+            case '.exit':
                 rl.close();
                 break;
             default:
