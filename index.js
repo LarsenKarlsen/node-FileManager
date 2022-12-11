@@ -14,6 +14,7 @@ import deleteFile from './commands/delete.js';
 import moveFile from './commands/move.js';
 import osCommands from './commands/osCommands.js'
 import getHash from './commands/hash.js';
+import {compressBrotli, decompressBrotli} from './commands/archivation.js';
 
 const __filename = fileURLToPath(import.meta.url);
 
@@ -81,6 +82,14 @@ const fileManager = async () => {
                 break;
             case line.includes('hash '):
                 await getHash(line.split(' ')[1], currentdir);
+                rl.prompt();
+                break;
+            case line.includes('decompress '):
+                await decompressBrotli(line.split(' ')[1], line.split(' ')[2], currentdir);
+                rl.prompt();
+                break;
+            case line.includes('compress '):
+                await compressBrotli(line.split(' ')[1], line.split(' ')[2], currentdir);
                 rl.prompt();
                 break;
             case line === '.exit':
