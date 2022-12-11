@@ -61,7 +61,7 @@ const fileManager = async () => {
                 rl.prompt();
                 break;
             case line.includes('rn '):
-                rename(line.split(' ')[1], currentdir, line.split(' ')[2]);
+                await rename(line.split(' ')[1], currentdir, line.split(' ')[2]);
                 rl.prompt();
                 break;
             case line.includes('cp '):
@@ -96,8 +96,7 @@ const fileManager = async () => {
                 rl.close();
                 break;
             default:
-                console.log('DEFAULT OUTPUT')
-                console.log(line);
+                console.log('Invalid input');
                 rl.prompt();
                 break;
         }
