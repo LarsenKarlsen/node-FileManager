@@ -32,6 +32,7 @@ npm run start -- --username=your_username
 - In case of unknown operation or invalid input (missing mandatory arguments, wrong data in arguments, etc.) `Invalid input` message should be shown and user should be able to enter another command
 - In case of error during execution of operation `Operation failed` message should be shown and user should be able to enter another command (e.g. attempt to perform an operation on a non-existent file or work on a non-existent path should result in the operation fail)
 - User can't go upper than root directory (e.g. on Windows it's current local drive root). If user tries to do so, current working directory doesn't change  
+- If you need to save file in current directory use blank space
 
 List of operations and their syntax:
 - Navigation & working directory (nwd)
