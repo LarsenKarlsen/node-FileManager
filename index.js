@@ -12,6 +12,7 @@ import add from './commands/add.js';
 import rename from './commands/rn.js';
 import copyFile from './commands/copy.js';
 import deleteFile from './commands/delete.js';
+import moveFile from './commands/move.js';
 
 const __filename = fileURLToPath(import.meta.url);
 
@@ -33,7 +34,7 @@ const fileManager = async () => {
     rl.prompt();
 
     rl.on('line', async (line)=>{
-        line = line.trim()
+        //line = line.trim()
         switch(true){
             case line === 'up':
                 currentdir = up(homedir, currentdir);
@@ -67,6 +68,10 @@ const fileManager = async () => {
                 break;
             case line.includes('rm '):
                 await deleteFile(line.split(' ')[1], currentdir);
+                rl.prompt();
+                break;
+            case line.includes('mv '):
+                await moveFile(line.split(' ')[1], line.split(' ')[2], currentdir);
                 rl.prompt();
                 break;
             case line === '.exit':
