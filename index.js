@@ -13,6 +13,7 @@ import copyFile from './commands/copy.js';
 import deleteFile from './commands/delete.js';
 import moveFile from './commands/move.js';
 import osCommands from './commands/osCommands.js'
+import getHash from './commands/hash.js';
 
 const __filename = fileURLToPath(import.meta.url);
 
@@ -75,7 +76,11 @@ const fileManager = async () => {
                 rl.prompt();
                 break;
             case line.includes('os --'):
-                await osCommands(line.split(' ')[1])
+                await osCommands(line.split(' ')[1]);
+                rl.prompt();
+                break;
+            case line.includes('hash '):
+                await getHash(line.split(' ')[1], currentdir);
                 rl.prompt();
                 break;
             case line === '.exit':
