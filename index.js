@@ -1,4 +1,3 @@
-import fs, { cp } from 'fs';
 import os from 'os';
 import readline from 'readline';
 import path from 'path';
@@ -13,6 +12,7 @@ import rename from './commands/rn.js';
 import copyFile from './commands/copy.js';
 import deleteFile from './commands/delete.js';
 import moveFile from './commands/move.js';
+import osCommands from './commands/osCommands.js'
 
 const __filename = fileURLToPath(import.meta.url);
 
@@ -72,6 +72,10 @@ const fileManager = async () => {
                 break;
             case line.includes('mv '):
                 await moveFile(line.split(' ')[1], line.split(' ')[2], currentdir);
+                rl.prompt();
+                break;
+            case line.includes('os --'):
+                await osCommands(line.split(' ')[1])
                 rl.prompt();
                 break;
             case line === '.exit':
