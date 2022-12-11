@@ -7,6 +7,7 @@ import { fileURLToPath } from 'url';
 import up from './commands/up.js';
 import ls from './commands/ls.js';
 import cd from './commands/cd.js';
+import cat from './commands/cat.js';
 
 const __filename = fileURLToPath(import.meta.url);
 
@@ -45,7 +46,9 @@ const fileManager = async () => {
                 rl.prompt();
                 break;
             case line.includes('cat '):
-
+                await cat(line.split(' ')[1], currentdir);
+                rl.prompt();
+                break;
             case line === '.exit':
                 rl.close();
                 break;
