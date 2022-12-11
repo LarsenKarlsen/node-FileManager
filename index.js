@@ -44,7 +44,9 @@ const fileManager = async () => {
                 rl.setPrompt(`You are currently in ${currentdir}\nEnter command : => `);
                 rl.prompt();
                 break;
-            case '.exit':
+            case line.includes('cat '):
+
+            case line === '.exit':
                 rl.close();
                 break;
             default:

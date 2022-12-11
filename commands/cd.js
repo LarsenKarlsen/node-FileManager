@@ -1,14 +1,11 @@
 import path from 'path';
 import fs from 'fs';
 
+import getAbsPath from './getAbsPath.js';
+
 
 const cd = async (pathTo, currentdir) => {
-    let absPathTo; 
-    if (!path.isAbsolute(pathTo)) {
-        absPathTo = path.join(currentdir, pathTo);
-    } else {
-        absPathTo = pathTo;
-    };
+    let absPathTo = getAbsPath(pathTo, currentdir); 
 
     absPathTo = await fs.promises.stat(absPathTo)
     .then(async(stat)=>{
