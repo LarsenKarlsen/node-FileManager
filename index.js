@@ -10,6 +10,7 @@ import cd from './commands/cd.js';
 import cat from './commands/cat.js';
 import add from './commands/add.js';
 import rename from './commands/rn.js';
+import copyFile from './commands/copy.js';
 
 const __filename = fileURLToPath(import.meta.url);
 
@@ -57,6 +58,10 @@ const fileManager = async () => {
                 break;
             case line.includes('rn '):
                 rename(line.split(' ')[1], currentdir, line.split(' ')[2]);
+                rl.prompt();
+                break;
+            case line.includes('cp '):
+                await copyFile(line.split(' ')[1], line.split(' ')[2], currentdir);
                 rl.prompt();
                 break;
             case line === '.exit':
