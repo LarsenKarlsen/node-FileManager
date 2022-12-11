@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs, { cp } from 'fs';
 import os from 'os';
 import readline from 'readline';
 import path from 'path';
@@ -8,6 +8,7 @@ import up from './commands/up.js';
 import ls from './commands/ls.js';
 import cd from './commands/cd.js';
 import cat from './commands/cat.js';
+import add from './commands/add.js';
 
 const __filename = fileURLToPath(import.meta.url);
 
@@ -15,7 +16,7 @@ const __dirname = path.dirname(__filename);
 
 const fileManager = async () => {
     const homedir = os.homedir();
-    let currentdir = path.join(homedir, 'node', 'taro');
+    let currentdir = path.join(homedir, 'rsSchool/node/node-FileManager/file-demo');
 
     const username = process.argv.slice(2).filter(s => s.includes('--username'))[0].split('=')[1];  
     console.log(`Welcome to the File Manager, ${username}!`);
@@ -47,6 +48,10 @@ const fileManager = async () => {
                 break;
             case line.includes('cat '):
                 await cat(line.split(' ')[1], currentdir);
+                rl.prompt();
+                break;
+            case line.includes('add '):
+                await add(line.split(' ')[1], currentdir);
                 rl.prompt();
                 break;
             case line === '.exit':
