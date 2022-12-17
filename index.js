@@ -22,7 +22,7 @@ const __dirname = path.dirname(__filename);
 
 const fileManager = async () => {
     const homedir = os.homedir();
-    let currentdir = path.join(homedir, 'rsSchool/node/node-FileManager/file-demo');
+    let currentdir = path.join(homedir);
 
     const username = process.argv.slice(2).filter(s => s.includes('--username'))[0].split('=')[1];  
     console.log(`Welcome to the File Manager, ${username}!`);
