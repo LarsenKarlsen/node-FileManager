@@ -9,6 +9,9 @@ const osCommands = async (command) => {
         case command === '--cpus':
             const cpusInfo = os.cpus();
             console.log(cpusInfo);
+            cpusInfo.forEach((cpu, index) =>{
+                console.log('Core', index+1,cpu.model.trim(), cpu.speed?cpu.speed/1000+' MHz':'No data');
+            })
             break;
         case command === '--homedir':
             console.log(os.homedir());
