@@ -3,10 +3,12 @@ import path from 'path';
 import fs from 'fs';
 import zlib from "zlib";
 
+import getFileName from "./getFileName.js";
+
 export const compressBrotli = async(pathFrom, pathTo, currentdir) => {
     try {
         const absPathFrom = getAbsPath(pathFrom, currentdir);
-        const filename = absPathFrom.split('/').slice(-1)[0] + '.br';
+        const filename = getFileName(absPathFrom) + '.br';
         const absPathTo = path.join(getAbsPath(pathTo, currentdir), filename);
 
         const readStream = fs.createReadStream(absPathFrom);
@@ -24,7 +26,7 @@ export const compressBrotli = async(pathFrom, pathTo, currentdir) => {
 export const decompressBrotli = async(pathFrom, pathTo, currentdir) => {
     try {
         const absPathFrom = getAbsPath(pathFrom, currentdir);
-        const filename = absPathFrom.split('/').slice(-1)[0].split('.').slice(0,-1).join('.');
+        const filename = getFileName(absPathFrom).replace('.br', '');
         const absPathTo = path.join(getAbsPath(pathTo, currentdir), filename);
         const readStream = fs.createReadStream(absPathFrom);
         const writableStream = fs.createWriteStream(absPathTo);

@@ -2,11 +2,12 @@ import fs from 'fs';
 import path from 'path';
 
 import getAbsPath from './getAbsPath.js';
+import getFileName from './getFileName.js'
 
 const copyFile = async(pathFrom, pathTo, currentdir ) => {
     try {
         const absPathFrom = getAbsPath(pathFrom, currentdir);
-        const fileName = absPathFrom.split('/').slice(-1)[0];
+        const fileName = getFileName(absPathFrom);
         const absPathTo = path.join(getAbsPath(pathTo, currentdir), fileName);
         
         const readStream = fs.createReadStream(absPathFrom);

@@ -5,7 +5,7 @@ import getAbsPath from './getAbsPath.js';
 
 const rename = async (pathTo, currentdir, newFileName) => {
     const absPath = getAbsPath(pathTo, currentdir);
-    const renameFilePath = path.join(absPath.split('/').slice(0, -1).join('/'), newFileName);
+    const renameFilePath = path.join(path.resolve(absPath, '..'), newFileName);
 
     if (absPath === renameFilePath) {
         console.log('Operation Failed');

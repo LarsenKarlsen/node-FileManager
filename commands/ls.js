@@ -1,11 +1,13 @@
 import fs from 'fs';
 import path from 'path';
 
+import getFileName from './getFileName.js'
+
 const fileInfo = async (pathToFile) => {
     const info = {};
 
     const fileStats = await fs.promises.stat(pathToFile);
-    info['Name'] = pathToFile.split('/').slice(-1).join('');
+    info['Name'] = getFileName(pathToFile);
     info['Type'] = fileStats.isFile()? 'file' : 'directory';
     info['Size'] = `${fileStats.size/1000 } kb`;
     return info;
